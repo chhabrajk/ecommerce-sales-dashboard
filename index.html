@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>E-Commerce Sales Dashboard — JK Chhabra</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background:#f5f6fa; color:#1a1a2e; }
+    .header { background:#1a1a2e; padding:36px 40px; }
+    .header h1 { color:#fff; font-size:24px; font-weight:600; margin-bottom:6px; }
+    .header p { color:#aab; font-size:14px; }
+    .header .badges { margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; }
+    .badge { padding:5px 14px; border-radius:20px; font-size:12px; font-weight:500; }
+    .b1 { background:#3776AB; color:#fff; }
+    .b2 { background:#00ADD8; color:#fff; }
+    .b3 { background:#3F4F75; color:#fff; }
+    .b4 { background:#150458; color:#fff; }
+
+    .kpi-row { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:14px; padding:28px 40px 0; }
+    .kpi-card { background:#fff; border-radius:10px; padding:16px 20px; border-top:4px solid #4361ee; box-shadow:0 1px 4px rgba(0,0,0,0.06); }
+    .kpi-card.green  { border-top-color:#3f8600; }
+    .kpi-card.red    { border-top-color:#d62828; }
+    .kpi-card.purple { border-top-color:#7209b7; }
+    .kpi-card.amber  { border-top-color:#b35c00; }
+    .kpi-card .lbl { font-size:12px; color:#888; margin-bottom:6px; }
+    .kpi-card .val { font-size:20px; font-weight:600; color:#1a1a2e; }
+
+    .section { padding:28px 40px; }
+    .section h2 { font-size:17px; font-weight:600; margin-bottom:16px; color:#1a1a2e; }
+
+    .chart-wrap { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.06); }
+    .chart-wrap iframe { width:100%; height:540px; border:none; display:block; }
+
+    .features-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+    .feature-card { background:#fff; border-radius:10px; padding:16px 20px; box-shadow:0 1px 4px rgba(0,0,0,0.06); border-left:4px solid #4361ee; }
+    .feature-card.green  { border-left-color:#3f8600; }
+    .feature-card.purple { border-left-color:#7209b7; }
+    .feature-card .ftitle { font-size:13px; font-weight:600; margin-bottom:6px; }
+    .feature-card .fdesc  { font-size:12px; color:#555; line-height:1.6; }
+
+    .filters-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-bottom:20px; }
+    .filter-card { background:#fff; border-radius:10px; padding:14px 18px; box-shadow:0 1px 4px rgba(0,0,0,0.06); display:flex; align-items:center; gap:12px; }
+    .filter-icon { font-size:22px; }
+    .filter-card .fname { font-size:13px; font-weight:600; }
+    .filter-card .fopts { font-size:11px; color:#888; margin-top:2px; }
+
+    .btn-row { display:flex; gap:14px; margin-top:20px; flex-wrap:wrap; }
+    .btn { padding:11px 24px; border-radius:8px; font-size:14px; font-weight:500; text-decoration:none; display:inline-block; }
+    .btn-primary { background:#4361ee; color:#fff; }
+    .btn-outline { background:#fff; color:#4361ee; border:1.5px solid #4361ee; }
+
+    .footer { background:#1a1a2e; color:#aab; text-align:center; padding:24px; font-size:13px; margin-top:20px; }
+    .footer a { color:#6faaff; text-decoration:none; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>📦 E-Commerce Sales Dashboard</h1>
+  <p>Interactive analytics — revenue by category, region & time with live filters &nbsp;|&nbsp; JK Chhabra</p>
+  <div class="badges">
+    <span class="badge b1">Python</span>
+    <span class="badge b2">Dash</span>
+    <span class="badge b3">Plotly</span>
+    <span class="badge b4">Pandas</span>
+  </div>
+</div>
+
+<!-- KPI CARDS -->
+<div class="kpi-row">
+  <div class="kpi-card"><div class="lbl">Total Orders</div><div class="val">2,000</div></div>
+  <div class="kpi-card green"><div class="lbl">Categories</div><div class="val">6</div></div>
+  <div class="kpi-card purple"><div class="lbl">Regions</div><div class="val">5</div></div>
+  <div class="kpi-card amber"><div class="lbl">Date Range</div><div class="val">2023–2024</div></div>
+  <div class="kpi-card red"><div class="lbl">Order Statuses</div><div class="val">4</div></div>
+  <div class="kpi-card green"><div class="lbl">Charts</div><div class="val">4 Live</div></div>
+</div>
+
+<!-- FILTERS -->
+<div class="section">
+  <h2>Interactive Filters</h2>
+  <div class="filters-row">
+    <div class="filter-card">
+      <div class="filter-icon">📅</div>
+      <div><div class="fname">Year Filter</div><div class="fopts">2023 · 2024 · All Years</div></div>
+    </div>
+    <div class="filter-card">
+      <div class="filter-icon">🛍️</div>
+      <div><div class="fname">Category Filter</div><div class="fopts">Electronics · Clothing · Home · Sports · Books · Beauty</div></div>
+    </div>
+    <div class="filter-card">
+      <div class="filter-icon">🗺️</div>
+      <div><div class="fname">Region Filter</div><div class="fopts">North · South · East · West · Central</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CHART -->
+<div class="section" style="padding-top:0;">
+  <h2>Dashboard Preview</h2>
+  <div class="chart-wrap">
+    <iframe src="screenshots/dashboard_snapshot.html" title="E-Commerce Sales Dashboard"></iframe>
+  </div>
+  <div class="btn-row">
+    <a class="btn btn-primary" href="https://github.com/chhabrajk/ecommerce-sales-dashboard" target="_blank">⭐ View on GitHub</a>
+    <a class="btn btn-outline" href="https://github.com/chhabrajk/ecommerce-sales-dashboard/blob/main/main_script.py" target="_blank">📄 View Code</a>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="section" style="padding-top:0;">
+  <h2>What This Dashboard Covers</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="ftitle">📈 Monthly Revenue Trend</div>
+      <div class="fdesc">Area chart showing revenue momentum month-over-month across the full 2-year period with seasonal patterns highlighted.</div>
+    </div>
+    <div class="feature-card green">
+      <div class="ftitle">🍕 Category Breakdown</div>
+      <div class="fdesc">Interactive pie chart showing revenue share across 6 product categories — drill down by applying year and region filters.</div>
+    </div>
+    <div class="feature-card purple">
+      <div class="ftitle">🗺️ Regional Performance</div>
+      <div class="fdesc">Horizontal bar chart ranking all 5 regions by revenue — instantly spot underperforming markets vs top performers.</div>
+    </div>
+    <div class="feature-card">
+      <div class="ftitle">📋 Order Status Mix</div>
+      <div class="fdesc">Bar chart tracking Delivered, Shipped, Cancelled, and Returned orders — monitor fulfilment health at a glance.</div>
+    </div>
+    <div class="feature-card green">
+      <div class="ftitle">🔢 Live KPI Cards</div>
+      <div class="fdesc">5 KPI cards update in real time as filters change — Total Revenue, Orders, AOV, Cancellation Rate, Unique Customers.</div>
+    </div>
+    <div class="feature-card purple">
+      <div class="ftitle">⚡ Built with Plotly Dash</div>
+      <div class="fdesc">Full Python web app — run locally for the complete interactive experience with all dropdowns and live callbacks.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Built by <a href="https://github.com/chhabrajk">JK Chhabra</a> &nbsp;·&nbsp;
+  <a href="https://github.com/chhabrajk/ecommerce-sales-dashboard">GitHub Repo</a> &nbsp;·&nbsp;
+  📧 jsinfo618@gmail.com
+</div>
+
+</body>
+</html>
